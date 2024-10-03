@@ -8,7 +8,6 @@ UPLOAD_VIDEO_FOLDER = "video/"
 UPLOAD_TEXT_FOLDER = "text/"
 UPLOAD_MUSIC_FOLDER = "music/"
 UPLOAD_ELSE_FOLDER = "else/"
-SUPP_FOLDER = "supp_folder/"
 CORBEILLE_FOLDER = "corbeille/"
 SWAGGER = {
     'title': 'API de gestion des médias',

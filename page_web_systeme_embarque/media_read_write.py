@@ -120,7 +120,7 @@ def get_medias():
     result = Media_schema().dump(medias, many=True)
 
     # Retourne la liste des médias avec un message de succès
-    return jsonify({"msg": "Tous les medias", "result": result}), 200
+    return jsonify({"msg": "Liste de tous les fichiers", "result": result}), 200
 
 
 @media_bp.get('/get/<int:id>')
@@ -217,12 +217,13 @@ def move_file_in_corbeille_by_id(id):
 
         # Supprime le fichier média
         # os.remove(media.media_url)
-        
+
         # Recupere le nom du fichier extrait de la bd
         basename = os.path.basename(media.media_url)
-        
+
         # Modifie l'url du fichier dans la bd
-        media.media_url=f"C:/Users/ELOUGA NYOBE/Desktop/System_embarque/corbeille/{basename}"
+        media.media_url = f"C:/Users/ELOUGA NYOBE/Desktop/System_embarque/corbeille/{
+            basename}"
         media.save()
 
         lg.warning(media.media_url)
@@ -265,17 +266,9 @@ def delete_by_id(id):
     if media is None:
         return jsonify({"msg": "Ce fichier n'existe pas"}), 404
 
-    # Vérifie si le dossier de suppression existe, sinon il est créé
-    if not os.path.exists(app.config['SUPP_FOLDER']):
-        os.makedirs(app.config['SUPP_FOLDER'])
-
     # Vérifie si le fichier a supprimer existe, sinon il est créé
     if os.path.exists(media.media_url):
 
-        lg.error(os.path.exists(app.config['SUPP_FOLDER']))
-
-        # Déplace le fichier média vers le dossier de suppression (supp_folder)
-        # shutil.move(media.media_url, app.config['SUPP_FOLDER'])
 
         # Supprime l'enregistrement du média de la base de données
         Media.delete_by_id(media)
