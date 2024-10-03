@@ -60,9 +60,9 @@ def allowed_file(filename, allowed_extensions):
 
 def create_file_url(file):
     """
-    Crée l'URL du fichier en fonction de son type (image, texte, musique, vidéo, PDF, ou autre).
+    Crée l'URL du fichier en fonction de son "type" (image, texte, musique, vidéo, PDF, ou autre).
     - Cette fonction dirige le fichier vers un dossier approprié selon son extension.
-    - Chaque type de fichier est enregistré dans un dossier distinct.
+    - Chaque "type" de fichier est enregistré dans un dossier distinct.
 
     Args:
         file: Le fichier à traiter.
@@ -70,8 +70,8 @@ def create_file_url(file):
     Returns:
         file_url: L'URL du fichier enregistré.
     """
-    
-    # Définit les extensions autorisées pour chaque type de fichier
+
+    # Définit les extensions autorisées pour chaque "type" de fichier
     ALLOWED_IMAGES_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
     ALLOWED_TEXT_EXTENSIONS = {'txt'}
     ALLOWED_MUSIC_EXTENSIONS = {'mp3'}
@@ -81,25 +81,25 @@ def create_file_url(file):
     # Vérifie si le fichier est une image et l'enregistre dans le dossier approprié
     if (allowed_file(file.filename, ALLOWED_IMAGES_EXTENSIONS)):
         file_url = file_manage(file, "UPLOAD_IMAGE_FOLDER")
-        return file_url
+        return {"url": file_url, "type": "image"}
     # Vérifie si le fichier est un fichier texte
     elif (allowed_file(file.filename, ALLOWED_TEXT_EXTENSIONS)):
         file_url = file_manage(file, "UPLOAD_TEXT_FOLDER")
-        return file_url
+        return {"url": file_url, "type": "text"}
      # Vérifie si le fichier est un fichier audio
     elif (allowed_file(file.filename, ALLOWED_MUSIC_EXTENSIONS)):
         file_url = file_manage(file, "UPLOAD_MUSIC_FOLDER")
-        return file_url
+        return {"url": file_url, "type": "audio"}
      # Vérifie si le fichier est une vidéo
     elif (allowed_file(file.filename, ALLOWED_VIDEO_EXTENSIONS)):
         file_url = file_manage(file, "UPLOAD_VIDEO_FOLDER")
-        return file_url
+        return {"url": file_url, "type": "video"}
     # Vérifie si le fichier est un PDF
     elif (allowed_file(file.filename, ALLOWED_PDF_EXTENSIONS)):
         file_url = file_manage(file, "UPLOAD_PDF_FOLDER")
-        return file_url
+        return {"url": file_url, "type": "pdf"}
     # Si aucune extension ne correspond, le fichier est enregistré dans un dossier "autres"
     else:
         file_url = file_manage(file, "UPLOAD_ELSE_FOLDER")
         print(f'file_url: {file_url}')
-        return file_url
+        return {"url": file_url, "type": "else"}
