@@ -14,6 +14,7 @@ from .schema import Media_schema
 media_bp = Blueprint("media", __name__)
 
 app.config['MAX_CONTENT_LENGTH'] = 20 * 1024 * 1024
+os.getenv()
 
 
 @media_bp.post("/add")
