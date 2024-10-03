@@ -1,1 +1,1 @@
-web: gunicorn page_web_systeme_embarque:app
+web: gunicorn run:app
