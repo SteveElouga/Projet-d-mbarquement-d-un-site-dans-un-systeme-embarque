@@ -13,6 +13,8 @@ from .schema import Media_schema
 
 media_bp = Blueprint("media", __name__)
 
+app.config['MAX_CONTENT_LENGTH'] = 20 * 1024 * 1024
+
 
 @media_bp.post("/add")
 def add():
@@ -44,7 +46,7 @@ def add():
 
     # Récupère le fichier envoyé via 'form-data' sous la clé 'file'
     file = request.files['file']
-    # print(f'file: {file}')
+    # print(f'file: {len(file.read())}')
 
     # Récupère les données supplémentaires envoyées sous la clé 'data' et les convertit en JSON
     data_json = request.form['data']
@@ -268,7 +270,6 @@ def delete_by_id(id):
 
     # Vérifie si le fichier a supprimer existe, sinon il est créé
     if os.path.exists(media.media_url):
-
 
         # Supprime l'enregistrement du média de la base de données
         Media.delete_by_id(media)
