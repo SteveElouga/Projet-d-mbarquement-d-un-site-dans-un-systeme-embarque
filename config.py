@@ -1,29 +1,32 @@
-SECRET_KEY = "9697ec9d39ce502235557f7dad19e213"
-FLASK_DEBUG = True
-SQLALCHEMY_DATABASE_URI = "sqlite:///app.db"
-SQLALCHEMY_DEBUG = True
-UPLOAD_IMAGE_FOLDER = "statics/images/"
-UPLOAD_PDF_FOLDER = "statics/pdf/"
-UPLOAD_VIDEO_FOLDER = "statics/video/"
-UPLOAD_TEXT_FOLDER = "statics/text/"
-UPLOAD_MUSIC_FOLDER = "statics/music/"
-UPLOAD_ELSE_FOLDER = "statics/else/"
-CORBEILLE_FOLDER = "statics/corbeille/"
+import os
+
+
+SECRET_KEY = os.getenv("SECRET_KEY")
+DEBUG = os.getenv("DEBUG")
+SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
+SQLALCHEMY_DEBUG = os.getenv('SQLALCHEMY_DEBUG')
+UPLOAD_IMAGE_FOLDER = os.getenv('UPLOAD_IMAGE_FOLDER')
+UPLOAD_PDF_FOLDER = os.getenv("UPLOAD_PDF_FOLDER")
+UPLOAD_VIDEO_FOLDER = os.getenv('UPLOAD_VIDEO_FOLDER')
+UPLOAD_TEXT_FOLDER = os.getenv('UPLOAD_TEXT_FOLDER')
+UPLOAD_MUSIC_FOLDER = os.getenv('UPLOAD_MUSIC_FOLDER')
+UPLOAD_ELSE_FOLDER = os.getenv('UPLOAD_ELSE_FOLDER')
+CORBEILLE_FOLDER = os.getenv('CORBEILLE_FOLDER')
 SWAGGER = {
-    'title': 'API de gestion des médias',
-    'uiversion': 3,  # Version de l'interface utilisateur Swagger UI
-    'description': 'Cette API permet de gérer les fichiers multimédias, de les ajouter, les récupérer et les supprimer.',
-    'version': '1.0.0',
-    'termsOfService': '/terms',
+    'title': os.getenv("SWAGGER_TITLE"),
+    'uiversion': int(os.getenv('SWAGGER_UIVERSION', 3)),  # Version de l'interface utilisateur Swagger UI
+    'description': os.getenv("SWAGGER_DESCRIPTION"),
+    'version': os.getenv('SWAGGER_VERSION'),
+    'termsOfService': os.getenv('SWAGGER_TERMS_OF_SERVICE'),
     'contact': {
-               'responsibleOrganization': 'ENSD',
-               'responsibleDeveloper': 'Elouga Nyobe Steve Didier',
-               'email': 'nyobeelouga5@gmail.com',
-               'url': 'http://elouganyobe.com',
+               'responsibleOrganization': os.getenv('SWAGGER_ORGANIZATION'),
+               'responsibleDeveloper': os.getenv('SWAGGER_DEVELOPER'),
+               'email': os.getenv('SWAGGER_EMAIL'),
+               'url': os.getenv('SWAGGER_URL'),
     },
     'license': {
-        'name': 'ENSPD',
-        'url': 'https://opensource.org/licenses/ENSPD',
+        'name': os.getenv("SWAGGER_LICENSE_NAME"),
+        'url': os.getenv('SWAGGER_LICENSE_URL'),
     },
     'specs': [
         {
@@ -33,7 +36,7 @@ SWAGGER = {
             'model_filter': lambda tag: True,  # Inclut tous les modèles
         }
     ],
-    'static_url_path': '/flasgger_static',  # Où les fichiers statiques sont servis
-    'swagger_ui': True,  # Active l'interface Swagger UI
-    'specs_route': '/'  # URL où Swagger sera disponible
+    'static_url_path': os.getenv('SWAGGER_STATIC_URL_PATH'),  # Où les fichiers statiques sont servis
+    # 'swagger_ui': True,  # Active l'interface Swagger UI
+    'specs_route': os.getenv('SWAGGER_SPECS_ROUTE')  # URL où Swagger sera disponible
 }
