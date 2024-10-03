@@ -1,0 +1,12 @@
+env/
+__pycache__/
+app.db
+else/
+images/
+instance/
+music/
+text/
+supp_folder/
+pdf/
+text/
+videos/
