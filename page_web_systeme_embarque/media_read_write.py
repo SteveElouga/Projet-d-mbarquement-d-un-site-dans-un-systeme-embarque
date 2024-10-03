@@ -14,6 +14,9 @@ from .schema import Media_schema
 media_bp = Blueprint("media", __name__)
 
 
+@media_bp.route("/")
+def index():
+    return "Hello this is the new version!"
 
 @media_bp.post("/add")
 def add():
