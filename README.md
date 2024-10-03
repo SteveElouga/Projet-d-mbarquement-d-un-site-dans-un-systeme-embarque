@@ -108,3 +108,7 @@ Les fichiers sont enregistrés dans des dossiers basés sur leur type (image, te
 ## License
 
 Ce projet est sous licence ENSPD.
+
+## Auteur
+
+Réalisé par @elouganyobe nyobeelouga5@gmail.com
