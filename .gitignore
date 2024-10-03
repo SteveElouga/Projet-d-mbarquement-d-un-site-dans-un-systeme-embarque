@@ -1,13 +1,7 @@
 env/
 __pycache__/
 instance/
-statics/else/
-statics/images/
-statics/instance/
-statics/music/
-statics/text/
-statics/pdf/
-statics/video/
+statics/
 migrations/
 corbeille/
 .vscode/
