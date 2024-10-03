@@ -2,13 +2,13 @@ FLASK_KEY = "9697ec9d39ce502235557f7dad19e213"
 FLASK_DEBUG = True
 SQLALCHEMY_DATABASE_URI = "sqlite:///app.db"
 SQLALCHEMY_DEBUG = True
-UPLOAD_IMAGE_FOLDER = "images/"
-UPLOAD_PDF_FOLDER = "pdf/"
-UPLOAD_VIDEO_FOLDER = "video/"
-UPLOAD_TEXT_FOLDER = "text/"
-UPLOAD_MUSIC_FOLDER = "music/"
-UPLOAD_ELSE_FOLDER = "else/"
-CORBEILLE_FOLDER = "corbeille/"
+UPLOAD_IMAGE_FOLDER = "statics/images/"
+UPLOAD_PDF_FOLDER = "statics/pdf/"
+UPLOAD_VIDEO_FOLDER = "statics/video/"
+UPLOAD_TEXT_FOLDER = "statics/text/"
+UPLOAD_MUSIC_FOLDER = "statics/music/"
+UPLOAD_ELSE_FOLDER = "statics/else/"
+CORBEILLE_FOLDER = "statics/corbeille/"
 SWAGGER = {
     'title': 'API de gestion des médias',
     'uiversion': 3,  # Version de l'interface utilisateur Swagger UI

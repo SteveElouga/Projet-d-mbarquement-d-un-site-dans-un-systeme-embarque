@@ -222,7 +222,7 @@ def move_file_in_corbeille_by_id(id):
         basename = os.path.basename(media.media_url)
 
         # Modifie l'url du fichier dans la bd
-        media.media_url = f"C:/Users/ELOUGA NYOBE/Desktop/System_embarque/corbeille/{
+        media.media_url = f"C:/Users/ELOUGA NYOBE/Desktop/System_embarque/statics/corbeille/{
             basename}"
         media.save()
 
