@@ -36,7 +36,7 @@ SWAGGER = {
             'model_filter': lambda tag: True,  # Inclut tous les modèles
         }
     ],
-    'static_url_path': os.getenv('SWAGGER_STATIC_URL_PATH'),  # Où les fichiers statiques sont servis
-    # 'swagger_ui': True,  # Active l'interface Swagger UI
-    'specs_route': os.getenv('SWAGGER_SPECS_ROUTE')  # URL où Swagger sera disponible
+    'static_url_path': '/flasgger_static',  # Où les fichiers statiques sont servis
+    'swagger_ui': True,  # Active l'interface Swagger UI
+    'specs_route': '/'  # URL où Swagger sera disponible
 }
