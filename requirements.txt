@@ -20,6 +20,7 @@ MarkupSafe==2.1.5
 marshmallow==3.22.0
 mistune==3.0.2
 packaging==24.1
+psycopg2==2.9.9
 python-dotenv==1.0.1
 pytz==2024.2
 PyYAML==6.0.2

@@ -3,7 +3,7 @@ import os
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG")
-SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL').replace("postgres://", "postgresql://")
 SQLALCHEMY_DEBUG = os.getenv('SQLALCHEMY_DEBUG')
 UPLOAD_IMAGE_FOLDER = os.getenv('UPLOAD_IMAGE_FOLDER')
 UPLOAD_PDF_FOLDER = os.getenv("UPLOAD_PDF_FOLDER")
