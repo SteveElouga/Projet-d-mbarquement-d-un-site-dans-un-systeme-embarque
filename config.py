@@ -3,7 +3,8 @@ import os
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG")
-SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL').replace("postgres://", "postgresql://")
+SQLALCHEMY_DATABASE_URI = os.getenv(
+    'DATABASE_URL').replace("postgres://", "postgresql://")
 SQLALCHEMY_DEBUG = os.getenv('SQLALCHEMY_DEBUG')
 UPLOAD_IMAGE_FOLDER = os.getenv('UPLOAD_IMAGE_FOLDER')
 UPLOAD_PDF_FOLDER = os.getenv("UPLOAD_PDF_FOLDER")
@@ -14,15 +15,17 @@ UPLOAD_ELSE_FOLDER = os.getenv('UPLOAD_ELSE_FOLDER')
 CORBEILLE_FOLDER = os.getenv('CORBEILLE_FOLDER')
 SWAGGER = {
     'title': os.getenv("SWAGGER_TITLE"),
-    'uiversion': int(os.getenv('SWAGGER_UIVERSION', 3)),  # Version de l'interface utilisateur Swagger UI
+    # Version de l'interface utilisateur Swagger UI
+    'uiversion': int(os.getenv('SWAGGER_UIVERSION', 3)),
     'description': os.getenv("SWAGGER_DESCRIPTION"),
     'version': os.getenv('SWAGGER_VERSION'),
     'termsOfService': os.getenv('SWAGGER_TERMS_OF_SERVICE'),
     'contact': {
-               'responsibleOrganization': os.getenv('SWAGGER_ORGANIZATION'),
-               'responsibleDeveloper': os.getenv('SWAGGER_DEVELOPER'),
-               'email': os.getenv('SWAGGER_EMAIL'),
-               'url': os.getenv('SWAGGER_URL'),
+        'name': "Steve Ddider",
+        'responsibleOrganization': os.getenv('SWAGGER_ORGANIZATION'),
+        'responsibleDeveloper': os.getenv('SWAGGER_DEVELOPER'),
+        'email': os.getenv('SWAGGER_EMAIL'),
+        'url': os.getenv('SWAGGER_URL'),
     },
     'license': {
         'name': os.getenv("SWAGGER_LICENSE_NAME"),
@@ -40,4 +43,4 @@ SWAGGER = {
     'swagger_ui': True,  # Active l'interface Swagger UI
     'specs_route': '/'  # URL où Swagger sera disponible
 }
-STATIC_FOLDER="statics"
+STATIC_FOLDER = "statics"
