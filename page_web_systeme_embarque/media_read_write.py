@@ -2,21 +2,69 @@ import os
 import logging as lg
 import json
 import shutil
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, send_from_directory
 from flasgger import Swagger
 
 from .models import Media
 from .extentions import app
-from utils.utils import create_file_url, file_manage, allowed_file
+from utils.utils import create_file_url, file_type
 
 from .schema import Media_schema
 
 media_bp = Blueprint("media", __name__)
 
 
+@app.route('/statics/<path:filename>')
+def serve_file(filename):
+    """
+    Renvoie le fichier static du dossier 'statics/'
+    ---
+    parameters:
+      - name: filename
+        in: path
+        type: string
+        required: true
+        description: The name of the file to retrieve
+    responses:
+      200:
+        description: fichier recupere
+      404:
+        description: Ce fichier n'existe pas
+    """
+    type = file_type(filename)
+    route = ''
+
+    if (type == "image"):
+        url = os.path.abspath(f'statics/images/{filename}')
+        route = "images/"
+    elif (type == 'text'):
+        url = os.path.abspath(f'statics/text/{filename}')
+        route = "text/"
+    elif (type == 'audio'):
+        url = os.path.abspath(f'statics/music/{filename}')
+        route = "music/"
+    elif (type == 'video'):
+        url = os.path.abspath(f'statics/video/{filename}')
+        route = "video/"
+    elif (type == 'pdf'):
+        url = os.path.abspath(f'statics/pdf/{filename}')
+        route = "pdf/"
+    else:
+        url = os.path.abspath(f'statics/else/{filename}')
+        route = "else/"
+
+    print(url)
+    if (url):
+        # return app.send_static_file(os.path.abspath(f'statics/else/{filename}')), 200
+        return send_from_directory(os.path.abspath(f'statics/{route}'), filename), 200
+    else:
+        return jsonify({"msg": "Ce fichier n'existe pas"})
+
+
 @media_bp.route("/")
 def index():
     return "Hello this is the new version!"
+
 
 @media_bp.post("/add")
 def add():
@@ -71,7 +119,7 @@ def add():
     elif url_media is not None:
         return jsonify({"msg": "Un fichier avec cette url existe deja"}), 409
     else:
-      # Sinon, crée un nouvel objet Media avec les informations fournies
+        # Sinon, crée un nouvel objet Media avec les informations fournies
         new_media = Media(
             name=data.get('name').lower(),
             type=file_url["type"],

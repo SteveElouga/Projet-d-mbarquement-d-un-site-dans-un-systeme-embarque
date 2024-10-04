@@ -40,3 +40,4 @@ SWAGGER = {
     'swagger_ui': True,  # Active l'interface Swagger UI
     'specs_route': '/'  # URL où Swagger sera disponible
 }
+STATIC_FOLDER="statics"

@@ -103,3 +103,40 @@ def create_file_url(file):
         file_url = file_manage(file, "UPLOAD_ELSE_FOLDER")
         print(f'file_url: {file_url}')
         return {"url": file_url, "type": "else"}
+
+
+def file_type(filename):
+    """
+    Cette fonction permet de recuperer le type d'un fichier dont le nom est passe en argument
+
+    Args:
+        file: Le nom fichier à traiter.
+
+    Returns:
+        type: Le type du fichier enregistré.
+    """
+
+    # Définit les extensions autorisées pour chaque "type" de fichier
+    ALLOWED_IMAGES_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+    ALLOWED_TEXT_EXTENSIONS = {'txt'}
+    ALLOWED_MUSIC_EXTENSIONS = {'mp3'}
+    ALLOWED_VIDEO_EXTENSIONS = {'mp4'}
+    ALLOWED_PDF_EXTENSIONS = {'pdf'}
+
+    # Vérifie si le fichier est une image et retourne le type image
+    if (allowed_file(filename, ALLOWED_IMAGES_EXTENSIONS)):
+        return "image"
+    # Vérifie si le fichier est un fichier texte
+    elif (allowed_file(filename, ALLOWED_TEXT_EXTENSIONS)):
+        return "text"     # Vérifie si le fichier est un fichier audio
+    elif (allowed_file(filename, ALLOWED_MUSIC_EXTENSIONS)):
+        return "audio"
+     # Vérifie si le fichier est une vidéo
+    elif (allowed_file(filename, ALLOWED_VIDEO_EXTENSIONS)):
+        return "video"
+    # Vérifie si le fichier est un PDF
+    elif (allowed_file(filename, ALLOWED_PDF_EXTENSIONS)):
+        return "pdf"
+   # Si aucune extension ne correspond, le fichier est enregistré dans un dossier "else"
+    else:
+        return "else"
