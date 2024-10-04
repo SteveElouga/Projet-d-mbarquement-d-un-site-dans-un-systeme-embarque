@@ -77,7 +77,7 @@ def add():
       - in: formData
         name: data
         type: string
-        required: true
+        required: false
         description: Les informations JSON pour le média (nom et description)
     responses:
       201:
@@ -94,7 +94,7 @@ def add():
     # print(f'file: {len(file.read())}')
 
     # Récupère les données supplémentaires envoyées sous la clé 'data' et les convertit en JSON
-    data_json = request.form['data']
+    data_json = request.form['metadata']
     # print(f'data_json: {data_json}')
     data = json.loads(data_json)
     # print(f'data: {data}')
