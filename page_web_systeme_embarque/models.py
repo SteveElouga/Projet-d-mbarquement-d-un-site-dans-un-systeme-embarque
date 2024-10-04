@@ -7,7 +7,7 @@ import logging as lg
 class Media(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False, index=True)
-    titre = db.Column(db.String(50), nullable=False, index=True)
+    titre = db.Column(db.String(50), nullable=True, index=True)
     type = db.Column(db.String(50), nullable=True, index=True)
     status = db.Column(db.String(50), nullable=True, server_default="active")
     description = db.Column(db.String())
