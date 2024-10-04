@@ -75,7 +75,7 @@ def add():
         required: true
         description: Le fichier à télécharger
       - in: formData
-        name: data
+        name: matadata
         type: string
         required: false
         description: Les informations JSON pour le média (nom et description)
