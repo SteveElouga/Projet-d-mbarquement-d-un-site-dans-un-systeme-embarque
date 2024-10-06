@@ -1,6 +1,7 @@
 from .extentions import app, db, migrate
 from . import models
-from .media_read_write import media_bp, Swagger
+from .media_read_write import media_bp
+from flasgger import Swagger
 
 db.init_app(app)
 migrate.init_app(app, db)
