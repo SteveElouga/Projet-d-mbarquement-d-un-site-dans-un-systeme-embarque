@@ -6,13 +6,6 @@ DEBUG = os.getenv("DEBUG")
 SQLALCHEMY_DATABASE_URI = os.getenv(
     'DATABASE_URL').replace("postgres://", "postgresql://")
 SQLALCHEMY_DEBUG = os.getenv('SQLALCHEMY_DEBUG')
-UPLOAD_IMAGE_FOLDER = os.getenv('UPLOAD_IMAGE_FOLDER')
-UPLOAD_PDF_FOLDER = os.getenv("UPLOAD_PDF_FOLDER")
-UPLOAD_VIDEO_FOLDER = os.getenv('UPLOAD_VIDEO_FOLDER')
-UPLOAD_TEXT_FOLDER = os.getenv('UPLOAD_TEXT_FOLDER')
-UPLOAD_MUSIC_FOLDER = os.getenv('UPLOAD_MUSIC_FOLDER')
-UPLOAD_ELSE_FOLDER = os.getenv('UPLOAD_ELSE_FOLDER')
-CORBEILLE_FOLDER = os.getenv('CORBEILLE_FOLDER')
 SWAGGER = {
     'title': os.getenv("SWAGGER_TITLE"),
     # Version de l'interface utilisateur Swagger UI
@@ -43,4 +36,4 @@ SWAGGER = {
     'swagger_ui': True,  # Active l'interface Swagger UI
     'specs_route': '/'  # URL où Swagger sera disponible
 }
-STATIC_FOLDER = "statics"
+

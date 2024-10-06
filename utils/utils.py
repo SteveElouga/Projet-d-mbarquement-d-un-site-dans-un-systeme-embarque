@@ -2,9 +2,18 @@ import os
 from flask import jsonify
 from page_web_systeme_embarque.extentions import app
 from werkzeug.utils import secure_filename
+from appwrite.client import Client
+from appwrite.services.storage import Storage
 
+# Configuration AppWrite
+client = Client()
+client.set_endpoint(os.getenv('APPWRITE_ENDPOINT'))  # Remplace par ton endpoint
+client.set_project(os.getenv('APPWRITE_PROJECT_ID'))
+client.set_key(os.getenv('APPWRITE_API_KEY'))
 
-def file_manage(file, folder):
+storage = Storage(client)
+
+def file_manage(file):
     """
     Gère l'enregistrement d'un fichier dans le dossier spécifié en fonction de son extension.
     - Si le fichier est absent ou non sélectionné, renvoie un message d'erreur avec un code 400.
@@ -28,14 +37,10 @@ def file_manage(file, folder):
 
     # Génère un nom de fichier sécurisé pour éviter les injections de chemin
     filename = secure_filename(filename=file.filename)
-
-    # Vérifie si le dossier spécifié existe, sinon le crée
-    if not os.path.exists(app.config[folder]):
-        os.makedirs(app.config[folder])
-
-    # Crée le chemin absolu pour le fichier et l'enregistre
-    file_url = os.path.abspath(os.path.join(
-        app.config[folder], filename))
+    
+    # Upload to AppWrite
+    result = storage.create_file(bucket_id='6703157c0026f0d7caae', file_id='unique()', file=file)
+    file_url = f"{os.getenv('APPWRITE_ENDPOINT')}/storage/buckets/os.getenv('BUCKET_ID')/files/{result['$id']}/view?project={os.getenv('APPWRITE_PROJECT_ID')}"
     file.save(file_url)
 
     # Renvoie le chemin du fichier enregistré
@@ -77,66 +82,27 @@ def create_file_url(file):
     ALLOWED_MUSIC_EXTENSIONS = {'mp3'}
     ALLOWED_VIDEO_EXTENSIONS = {'mp4'}
     ALLOWED_PDF_EXTENSIONS = {'pdf'}
+        
+    file_url = file_manage(file)
 
     # Vérifie si le fichier est une image et l'enregistre dans le dossier approprié
     if (allowed_file(file.filename, ALLOWED_IMAGES_EXTENSIONS)):
-        file_url = file_manage(file, "UPLOAD_IMAGE_FOLDER")
         return {"url": file_url, "type": "image"}
     # Vérifie si le fichier est un fichier texte
     elif (allowed_file(file.filename, ALLOWED_TEXT_EXTENSIONS)):
-        file_url = file_manage(file, "UPLOAD_TEXT_FOLDER")
         return {"url": file_url, "type": "text"}
      # Vérifie si le fichier est un fichier audio
     elif (allowed_file(file.filename, ALLOWED_MUSIC_EXTENSIONS)):
-        file_url = file_manage(file, "UPLOAD_MUSIC_FOLDER")
         return {"url": file_url, "type": "audio"}
      # Vérifie si le fichier est une vidéo
     elif (allowed_file(file.filename, ALLOWED_VIDEO_EXTENSIONS)):
-        file_url = file_manage(file, "UPLOAD_VIDEO_FOLDER")
         return {"url": file_url, "type": "video"}
     # Vérifie si le fichier est un PDF
     elif (allowed_file(file.filename, ALLOWED_PDF_EXTENSIONS)):
-        file_url = file_manage(file, "UPLOAD_PDF_FOLDER")
         return {"url": file_url, "type": "pdf"}
     # Si aucune extension ne correspond, le fichier est enregistré dans un dossier "autres"
     else:
-        file_url = file_manage(file, "UPLOAD_ELSE_FOLDER")
         print(f'file_url: {file_url}')
         return {"url": file_url, "type": "else"}
 
 
-def file_type(filename):
-    """
-    Cette fonction permet de recuperer le type d'un fichier dont le nom est passe en argument
-
-    Args:
-        file: Le nom fichier à traiter.
-
-    Returns:
-        type: Le type du fichier enregistré.
-    """
-
-    # Définit les extensions autorisées pour chaque "type" de fichier
-    ALLOWED_IMAGES_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-    ALLOWED_TEXT_EXTENSIONS = {'txt'}
-    ALLOWED_MUSIC_EXTENSIONS = {'mp3'}
-    ALLOWED_VIDEO_EXTENSIONS = {'mp4'}
-    ALLOWED_PDF_EXTENSIONS = {'pdf'}
-
-    # Vérifie si le fichier est une image et retourne le type image
-    if (allowed_file(filename, ALLOWED_IMAGES_EXTENSIONS)):
-        return "image"
-    # Vérifie si le fichier est un fichier texte
-    elif (allowed_file(filename, ALLOWED_TEXT_EXTENSIONS)):
-        return "text"     # Vérifie si le fichier est un fichier audio
-    elif (allowed_file(filename, ALLOWED_MUSIC_EXTENSIONS)):
-        return "audio"
-     # Vérifie si le fichier est une vidéo
-    elif (allowed_file(filename, ALLOWED_VIDEO_EXTENSIONS)):
-        return "video"
-    # Vérifie si le fichier est un PDF
-    elif (allowed_file(filename, ALLOWED_PDF_EXTENSIONS)):
-        return "pdf"
-   # Si aucune extension ne correspond, le fichier est enregistré dans un dossier "else"
-    else:
-        return "else"

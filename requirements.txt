@@ -1,7 +1,10 @@
 alembic==1.13.3
 aniso8601==9.0.1
+appwrite==6.1.0
 attrs==24.2.0
 blinker==1.8.2
+certifi==2024.8.30
+charset-normalizer==3.3.2
 click==8.1.7
 colorama==0.4.6
 flasgger==0.9.7.1
@@ -11,6 +14,7 @@ Flask-Migrate==4.0.7
 Flask-SQLAlchemy==3.1.1
 greenlet==3.1.1
 gunicorn==23.0.0
+idna==3.10
 importlib_resources==6.4.5
 itsdangerous==2.2.0
 Jinja2==3.1.4
@@ -26,8 +30,10 @@ python-dotenv==1.0.1
 pytz==2024.2
 PyYAML==6.0.2
 referencing==0.35.1
+requests==2.32.3
 rpds-py==0.20.0
 six==1.16.0
 SQLAlchemy==2.0.35
 typing_extensions==4.12.2
+urllib3==2.2.3
 Werkzeug==3.0.4
