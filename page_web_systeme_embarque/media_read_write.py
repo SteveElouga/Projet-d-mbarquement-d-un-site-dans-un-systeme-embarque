@@ -121,7 +121,8 @@ def add():
             titre=data.get('titre').lower(),
             type=file_url["type"],
             description=data.get('description').lower(),
-            media_url=file_url["url"]
+            # media_url=file_url["url"]
+            media_url=f"https://systeme-embarque-web-fea32d9c2d57.herokuapp.com/statics/{media_name}"
         )
         # Enregistre le nouvel objet Media dans la base de données
         new_media.save()
