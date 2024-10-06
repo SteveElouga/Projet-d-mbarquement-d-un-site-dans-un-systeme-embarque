@@ -1,13 +1,9 @@
-import os
 import logging as lg
 import json
-import shutil
-from flask import Blueprint, request, jsonify, send_from_directory
-from flasgger import Swagger
+from flask import Blueprint, request, jsonify
 
 from .models import Media
-from .extentions import app
-from utils.utils import create_file_url, file_type
+from utils.utils import create_file_url
 
 from .schema import Media_schema
 

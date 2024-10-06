@@ -1,6 +1,5 @@
 import os
 from flask import jsonify
-from page_web_systeme_embarque.extentions import app
 from werkzeug.utils import secure_filename
 from appwrite.client import Client
 from appwrite.services.storage import Storage
@@ -34,13 +33,10 @@ def file_manage(file):
     # Vérifie si le fichier n'a pas été sélectionné (nom vide)
     if file.filename == "":
         return jsonify({"msg": "No files selected"}), 400
-
-    # Génère un nom de fichier sécurisé pour éviter les injections de chemin
-    filename = secure_filename(filename=file.filename)
     
     # Upload to AppWrite
     result = storage.create_file(bucket_id='6703157c0026f0d7caae', file_id='unique()', file=file)
-    file_url = f"{os.getenv('APPWRITE_ENDPOINT')}/storage/buckets/os.getenv('BUCKET_ID')/files/{result['$id']}/view?project={os.getenv('APPWRITE_PROJECT_ID')}"
+    file_url = f"{os.getenv('APPWRITE_ENDPOINT')}/storage/buckets/{os.getenv('BUCKET_ID')}/files/{result['$id']}/view?project={os.getenv('APPWRITE_PROJECT_ID')}"
     file.save(file_url)
 
     # Renvoie le chemin du fichier enregistré
