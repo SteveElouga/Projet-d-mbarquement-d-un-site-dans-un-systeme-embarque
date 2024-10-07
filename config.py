@@ -36,4 +36,4 @@ SWAGGER = {
     'swagger_ui': True,  # Active l'interface Swagger UI
     'specs_route': '/'  # URL où Swagger sera disponible
 }
-
+TEMP_UPLOAD_FOLDER='statics/temp/upload_folder'

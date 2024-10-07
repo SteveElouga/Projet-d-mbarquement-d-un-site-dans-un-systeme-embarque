@@ -14,8 +14,8 @@ class Media(db.Model):
     media_url = db.Column(db.String(), unique=True, nullable=False, index=True)
     created_at = db.Column(db.DateTime(), server_default=func.now())
 
-    def __repr__():
-        return f"<Media {Media.name}>"
+    def __repr__(self):
+        return f"<Media {self.name}>"
 
     @classmethod
     def get_media_by_name(cls, name):

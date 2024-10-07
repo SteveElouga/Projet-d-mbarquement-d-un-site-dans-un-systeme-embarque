@@ -1,9 +1,10 @@
 import logging as lg
 import json
+import os
 from flask import Blueprint, request, jsonify
 
 from .models import Media
-from utils.utils import create_file_url
+from utils.utils import create_file_url, storage
 
 from .schema import Media_schema
 
@@ -40,7 +41,6 @@ def add():
 
     # Récupère le fichier envoyé via 'form-data' sous la clé 'file'
     file = request.files['file']
-    # print(f'file: {len(file.read())}')
 
     # Récupère les données supplémentaires envoyées sous la clé 'data' et les convertit en JSON
     data_json = request.form['metadata']
@@ -49,14 +49,14 @@ def add():
     # print(f'data: {data}')
 
     # Redéfinie l'url du fichier a enregistrer Génère l'URL où le fichier sera stocké
-    file_url = create_file_url(file)
+
     # print(f'file_url: {str(file_url)}')
+    file_url = create_file_url(file)
+    media_name = file.filename
 
     # Si un fichier avec le même nom existe, retourne un message d'erreur avec un code 409
-    media = Media.get_media_by_name(name=data.get('name'))
+    media = Media.get_media_by_name(name=media_name)
     url_media = Media.get_media_by_url(url=file_url["url"])
-    media_name = file.filename
-    # print(f'url_media: {url_media}')
 
     # Si un fichier avec le même nom ou avec la même URL existe, retourne un message d'erreur avec un code 409
     if media is not None:
@@ -70,8 +70,7 @@ def add():
             titre=data.get('titre').lower(),
             type=file_url["type"],
             description=data.get('description').lower(),
-            # media_url=file_url["url"]
-            media_url=url_media
+            media_url=file_url["url"]
         )
         # Enregistre le nouvel objet Media dans la base de données
         new_media.save()
@@ -262,8 +261,15 @@ def delete_by_id(id):
     if media is None:
         return jsonify({"msg": "Ce fichier n'existe pas"}), 404
 
+    url = media.media_url
+
     # Vérifie si le fichier a supprimer existe, sinon il est créé
-    if media.media_url:
+    if url:
+      
+        file_id = url.split('/files/')[1].split('/view')[0]
+      
+        storage.delete_file(os.getenv(
+            'BUCKET_ID'), file_id)
 
         # Supprime l'enregistrement du média de la base de données
         Media.delete_by_id(media)
@@ -315,6 +321,5 @@ def restaure_media_by_id(id):
         return jsonify({"msg": "Média restaure avec succès"}), 200
 
     else:
-
 
         return jsonify({"msg": "Impossible de restaurer ce fichier"}), 404
