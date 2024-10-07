@@ -9,4 +9,4 @@ class Media_schema(Schema):
     media_url = fields.String()
     type = fields.String()
     status = fields.String()
-    created_at = fields.DateTime(format="%d/%m/%Y")
+    created_at = fields.DateTime(format="%d/%m/%Y %H:%M:%S")
