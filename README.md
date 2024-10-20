@@ -108,7 +108,19 @@ Les fichiers sont enregistrés dans des dossiers basés sur leur type (image, te
 ## Contribuer
 
 - Forkez le projet
-- Créez une branche de fonctionnalité (git checkout -b feature/new-feature)
+- Créez une branche de fonctionnalité (git checkouinterface=wlan0
+driver=nl80211
+ssid=MediasAppAP
+hw_mode=g
+channel=7
+wmm_enabled=0
+macaddr_acl=0
+auth_algs=1
+ignore_broadcast_ssid=0
+wpa=2
+wpa_passphrase=TonMotDePasse
+wpa_key_mgmt=WPA-PSK
+rsn_pairwise=CCMPt -b feature/new-feature)
 - Committez vos changements (git commit -m 'Add some feature')
 - Poussez à la branche (git push origin feature/new-feature)
 - Créez une nouvelle Pull Request
@@ -121,16 +133,16 @@ Ce projet est sous licence ENSPD.
 
 Réalisé par @elouganyobe nyobeelouga5@gmail.com
 
-interface=wlan0
-driver=nl80211
-ssid=MediasAppAP
-hw_mode=g
-channel=7
-wmm_enabled=0
-macaddr_acl=0
-auth_algs=1
-ignore_broadcast_ssid=0
-wpa=2
-wpa_passphrase=TonMotDePasse
-wpa_key_mgmt=WPA-PSK
-rsn_pairwise=CCMP
+hostapd.service - Access point and authentication server for Wi-Fi and Ethern>
+     Loaded: loaded (/lib/systemd/system/hostapd.service; enabled; preset: enab>
+     Active: failed (Result: exit-code) since Sun 2024-10-20 21:11:47 WAT; 1min>
+       Docs: man:hostapd(8)
+    Process: 6429 ExecStart=/usr/sbin/hostapd -B -P /run/hostapd.pid $DAEMON_OP>
+        CPU: 20ms
+
+Oct 20 21:11:47 raspberrypi systemd[1]: hostapd.service: Scheduled restart job,>
+Oct 20 21:11:47 raspberrypi systemd[1]: Stopped hostapd.service - Access point >
+Oct 20 21:11:47 raspberrypi systemd[1]: hostapd.service: Start request repeated>
+Oct 20 21:11:47 raspberrypi systemd[1]: hostapd.service: Failed with result 'ex>
+Oct 20 21:11:47 raspberrypi systemd[1]: Failed to start hostapd.service - Acces>
+lines 1-12/12 (END)
