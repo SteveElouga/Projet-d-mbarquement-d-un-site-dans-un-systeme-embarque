@@ -121,20 +121,16 @@ Ce projet est sous licence ENSPD.
 
 Réalisé par @elouganyobe nyobeelouga5@gmail.com
 
-server {
-    listen 80;
-    server_name raspberrypi.local;
-
-    location / {
-        root /chemin/vers/ton/projet/frontend/build;
-        try_files $uri /index.html;
-    }
-
-    location /api/ {
-        proxy_pass http://localhost:5000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-}
+interface=wlan0
+driver=nl80211
+ssid=MediasAppAP
+hw_mode=g
+channel=7
+wmm_enabled=0
+macaddr_acl=0
+auth_algs=1
+ignore_broadcast_ssid=0
+wpa=2
+wpa_passphrase=TonMotDePasse
+wpa_key_mgmt=WPA-PSK
+rsn_pairwise=CCMP
