@@ -18,7 +18,7 @@ SWAGGER = {
     # Version de l'interface utilisateur Swagger UI
     'uiversion': int(os.getenv('SWAGGER_UIVERSION', 3)),
     'description': os.getenv("SWAGGER_DESCRIPTION"),
-    'version': os.getenv('SWAGGER_VERSION'),
+    'version': os.getenv('SWAGGER_VERSION', "2.6.0"),
     'termsOfService': os.getenv('SWAGGER_TERMS_OF_SERVICE'),
     'contact': {
         'name': "Steve Ddider",

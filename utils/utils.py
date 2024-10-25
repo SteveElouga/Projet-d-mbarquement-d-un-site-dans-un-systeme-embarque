@@ -140,3 +140,24 @@ def file_type(filename):
    # Si aucune extension ne correspond, le fichier est enregistré dans un dossier "else"
     else:
         return "else"
+
+
+def get_files_per_type(medias, valid_extensions):
+    files_list = []
+    
+    for media in medias:
+        if media.name.endswith(valid_extensions):
+
+            files_list.append(media)
+            
+    return files_list
+
+def get_files_per_type_other(medias, valid_extensions):
+    files_list = []
+    
+    for media in medias:
+        if not media.name.endswith(valid_extensions):
+
+            files_list.append(media)
+            
+    return files_list
