@@ -51,8 +51,7 @@ def file_manage(file):
 
     # Utiliser InputFile pour l'upload vers AppWrite
     input_file = InputFile.from_path(temp_file_path)
-    
-    
+
     media = Media.get_media_by_name(name=file.filename)
 
     if media is None:
@@ -64,7 +63,6 @@ def file_manage(file):
 
         file_url = f"{os.getenv('APPWRITE_ENDPOINT')}/storage/buckets/{os.getenv(
             'BUCKET_ID')}/files/{result['$id']}/view?project={os.getenv('APPWRITE_PROJECT_ID')}"
-            
 
         os.remove(temp_file_path)
 
@@ -131,3 +129,62 @@ def create_file_url(file):
     else:
         print(f'file_url: {file_url}')
         return {"url": file_url, "type": "else"}
+
+
+def file_type(filename):
+    """
+    Cette fonction permet de recuperer le type d'un fichier dont le nom est passe en argument
+
+    Args:
+        file: Le nom fichier à traiter.
+
+    Returns:
+        type: Le type du fichier enregistré.
+    """
+
+    # Définit les extensions autorisées pour chaque "type" de fichier
+    ALLOWED_IMAGES_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+    ALLOWED_TEXT_EXTENSIONS = {'txt'}
+    ALLOWED_MUSIC_EXTENSIONS = {'mp3'}
+    ALLOWED_VIDEO_EXTENSIONS = {'mp4'}
+    ALLOWED_PDF_EXTENSIONS = {'pdf'}
+
+    # Vérifie si le fichier est une image et retourne le type image
+    if (allowed_file(filename, ALLOWED_IMAGES_EXTENSIONS)):
+        return "image"
+    # Vérifie si le fichier est un fichier texte
+    elif (allowed_file(filename, ALLOWED_TEXT_EXTENSIONS)):
+        return "text"     # Vérifie si le fichier est un fichier audio
+    elif (allowed_file(filename, ALLOWED_MUSIC_EXTENSIONS)):
+        return "audio"
+     # Vérifie si le fichier est une vidéo
+    elif (allowed_file(filename, ALLOWED_VIDEO_EXTENSIONS)):
+        return "video"
+    # Vérifie si le fichier est un PDF
+    elif (allowed_file(filename, ALLOWED_PDF_EXTENSIONS)):
+        return "pdf"
+   # Si aucune extension ne correspond, le fichier est enregistré dans un dossier "else"
+    else:
+        return "else"
+
+
+def get_files_per_type(medias, valid_extensions):
+    files_list = []
+
+    for media in medias:
+        if media.name.endswith(valid_extensions):
+
+            files_list.append(media)
+
+    return files_list
+
+
+def get_files_per_type_other(medias, valid_extensions):
+    files_list = []
+
+    for media in medias:
+        if not media.name.endswith(valid_extensions):
+
+            files_list.append(media)
+
+    return files_list
